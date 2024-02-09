@@ -15,7 +15,7 @@ const Card: React.FC<CardProps> = ({ title, value }) => {
         <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
           {title}
         </h5>
-        <h3>${value}</h3>
+        <h3 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">${value}</h3>
       </a>
     </div>
   );
