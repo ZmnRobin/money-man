@@ -1,4 +1,5 @@
 // ExpenseForm.tsx
+'use client'
 import { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
@@ -28,6 +29,7 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ onClose, fetchExpenses, setLo
         setCategories(response.data);
         setLoading(false);
       } catch (error) {
+        setLoading(false)
         toast.error('Error fetching categories!');
         console.error('Error fetching categories:', error);
       }

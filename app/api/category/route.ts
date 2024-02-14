@@ -1,6 +1,8 @@
 import connectDb from "@/utils/db";
 import Category from "@/models/categorySchema";
-import { NextResponse,NextRequest } from "next/server";
+import Expense from "@/models/expenseSchema";
+import { NextRequest, NextResponse } from "next/server";
+
 
 export async function GET(request:NextRequest){
     await connectDb();
@@ -29,4 +31,27 @@ export async function POST(request:NextRequest){
         console.error(error);
         return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });
     }
+}
+
+// Define DELETE API function
+export async function DELETE(request: NextRequest) {
+  await connectDb();
+  const searchParams = request.nextUrl.searchParams;
+  const email = searchParams.get('email');
+  const id = searchParams.get('id');
+  
+  try {
+      // Find the category by ID and email
+      const deletedCategory = await Category.findOneAndDelete({ _id: id, email });
+
+      // If category found, remove associated expenses
+      if (deletedCategory) {
+          await Expense.deleteMany({ category: deletedCategory._id });
+      }
+
+      return NextResponse.json({ message: 'Category and associated expenses deleted successfully' }, { status: 200 });
+  } catch (error) {
+      console.error(error);
+      return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });
+  }
 }

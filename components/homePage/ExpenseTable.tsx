@@ -20,7 +20,7 @@ interface ExpenseTableProps {
     }, {});
   
     // Get unique categories
-    const uniqueCategories = [...new Set(expenses.map(expense => expense.category.name))];
+    const uniqueCategories = [...new Set(expenses?.map(expense => expense?.category?.name))];
   
     return (
       <table className="table-auto border-collapse w-full text-center">
@@ -39,7 +39,7 @@ interface ExpenseTableProps {
               <td className="border border-gray-300 px-4 py-2">{date}</td>
               {uniqueCategories.map(category => {
                 const total = groupedExpenses[date]
-                  .filter((expense: { category: { name: any; }; }) => expense.category.name === category)
+                  .filter((expense: { category: { name: any; }; }) => expense?.category?.name === category)
                   .reduce((acc: any, expense: { amount: any; }) => acc + expense.amount, 0);
                 return <td key={category} className="border border-gray-300 px-4 py-2">{total}</td>;
               })}

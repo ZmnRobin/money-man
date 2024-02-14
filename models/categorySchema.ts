@@ -3,7 +3,7 @@ import mongoose, { Schema} from 'mongoose';
 // Define the category schema
 const categorySchema = new Schema({
   email: { type: String, required: true },
-  name: { type: String, required: true },
+  name: { type: String, required: true, unique:true },
   type: { type: String, enum: ['expense', 'income'], required: true }
 });
 

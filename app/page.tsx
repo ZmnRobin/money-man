@@ -65,15 +65,6 @@ export default function Home() {
         <button className="border p-1 hover:bg-gray-200">+ Income</button>
         <button className="border p-1 hover:bg-gray-200" onClick={()=>setShowExpenseForm(true)}>- Expense</button>
       </div>
-
-      {/* <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2">
-        <Card title="Total Income" value={500} />
-        <Card title="Total Expense" value={300} />
-        <Card title="Current Balance" value={200} />
-        <Card title="Profit or Loss" value={-100} />
-      </div> */}
-
-        {/* Month dropdown */}
         <div className="my-3">
           <label className="block mb-1">Select Month:</label>
           <select
@@ -95,7 +86,7 @@ export default function Home() {
             <ExpenseTable expenses={expenses} />
         </div>}
       {loading && <Loader/>}
-      {showCategoryForm && <CategoryForm onClose={onClose}/>}
+      {showCategoryForm && <CategoryForm onClose={onClose} fetchExpenses={fetchExpenses}/>}
       {showExpenseForm && <ExpenseForm onClose={onClose} fetchExpenses={fetchExpenses} setLoading={setLoading}/>}
     </div>
   );
